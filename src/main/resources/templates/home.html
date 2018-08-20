@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<div style="display: flex;flex-direction: column">
+    <div>
+        <div>
+            <h3>Add user:</h3>
+            <form action="/user/add" method="post">
+                <input type="text" name="name" placeholder="Name"><br/>
+                <input type="text" name="surname" placeholder="Surname"><br/>
+                <input type="submit" value="Add User"><br/>
+            </form>
+        </div>
+        <div>
+            <h2>All Users:</h2>
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>ection</th>
+                </tr>
+                <tr th:each="user: ${users}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.surname}"></td>
+                    <td><a th:href="@{'/user/delete/'+${user.id}}">Delete</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div style="display: flex; flex-direction: row">
+        <div style="width: 50%">
+            <div>
+                <h3>Add author:</h3>
+                <form action="/author/addAuthor" method="post">
+                    <input type="text" name="name" placeholder="Name"><br/>
+                    <input type="text" name="surname" placeholder="Surname"><br/>
+                    <input type="number" name="age" placeholder="Age"><br/>
+                    <input type="text" name="email" placeholder="Email"><br/>
+                    <input type="submit" value="Add Aunthor"><br/>
+                </form>
+            </div>
+            <div>
+                <h2>All Authors:</h2>
+                <table>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Age</th>
+                        <th>Email</th>
+                    </tr>
+                    <tr th:each="author: ${authors}">
+                        <td th:text="${author.id}"></td>
+                        <td th:text="${author.name}"></td>
+                        <td th:text="${author.surname}"></td>
+                        <td th:text="${author.age}"></td>
+                        <td th:text="${author.email}"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div style="width: 50%">
+            <div>
+                <h3>Add book:</h3>
+                <form action="/book/bookAdd" method="post">
+
+                    <input type="text" name="title" placeholder="Title"><br/>
+                    <input type="text" name="description" placeholder="Description"><br/>
+                    <input type="text" name="price" placeholder="Price"><br/>
+                    <label for="authorId"></label>
+                    <select name="authorId" id="authorId">
+                        <option th:each="author : ${authors}" th:value="${author.id}"
+                                th:text="${author.name}"></option>
+                    </select><br/>
+                    <input type="submit" value="Add Book"><br/>
+                </form>
+            </div>
+
+            <div>
+                <h2>All Books:</h2>
+                <table>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Author</th>
+                    </tr>
+                    <tr th:each="book: ${books}">
+                        <td th:text="${book.id}"></td>
+                        <td th:text="${book.title}"></td>
+                        <td th:text="${book.description}"></td>
+                        <td th:text="${book.price}"></td>
+                        <td th:text="${book.author.name}"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
